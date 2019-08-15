@@ -1,0 +1,11 @@
+$ttl 38400
+darmsec.com.	IN	SOA	ns.darmsec.com. darm.darmsec.com. (
+			1565807260
+			10800
+			3600
+			604800
+			38400 )
+darmsec.com.	IN	NS	ns.darmsec.com.
+ns.darmsec.com.	IN	A	172.17.0.1
+www.darmsec.com.	IN	CNAME	webserver
+webserver.darmsec.com.	IN	A	192.168.1.1

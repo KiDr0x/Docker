@@ -1,0 +1,8 @@
+$ttl 38400
+1.42.17.172.in-addr.arpa.	IN	SOA	ns.darmsec.com. admin.darmsec.com. (
+			1565807173
+			10800
+			3600
+			604800
+			38400 )
+1.0.17.172.in-addr.arpa.	IN	NS	ns.darmsec.com.
