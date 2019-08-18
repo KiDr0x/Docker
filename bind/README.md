@@ -1,3 +1,3 @@
-##### Usage:
-
-Just run `bind-run.sh` on your terminal
+Usage
+-----
+To run the container just execute `bind-run.sh` on your terminal.
