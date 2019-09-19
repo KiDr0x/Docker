@@ -1,0 +1,8 @@
+ version: '3'
+ services:
+   nginx:
+     image: "darmanex/nginx:1.16.1"
+     container_name: "nginx"
+     ports:
+        - "80:80"
+        - "443:443"
