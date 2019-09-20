@@ -1,0 +1,53 @@
+version: '3.7'
+
+services:
+  gitlab:
+    container_name: gitlabce
+    image: gitlab/gitlab-ce:12.1.6-ce.0
+    restart: always
+    hostname: 'gitlab.darmsec.net'
+    links:
+        - postgresql:postgresql
+        - redis:redis
+    environment:
+        GITLAB_OMNIBUS_CONFIG: |
+                external_url 'http://gitlab.darmsec.net:8929'
+                gitlab_rails['gitlab_shell_ssh_port'] = 30022
+    ports:
+          # both ports must match the port from external_url above
+    - "8929:8929"
+          # the mapped port must match ssh_port specified above.
+    - "30022:22"
+# the following are hints on what volumes to mount if you want to persist data
+#  volumes:
+#    - data/gitlab/config:/etc/gitlab:rw
+#    - data/gitlab/logs:/var/log/gitlab:rw
+#    - data/gitlab/data:/var/opt/gitlab:rw
+    volumes:
+    - ~/Desktop/docker/gitlab/srv/docker/gitlab/gitlab:/home/git/data
+
+
+  postgresql:
+    container_name: postgre-gitlabce
+    image: postgres:11.5-alpine
+    restart: always
+    volumes:
+    - ~/Desktop/docker/gitlab/srv/docker/gitlab/postgresql:/var/lib/postgresql
+    environment:
+    - DB_USER=gitlab
+    - DB_PASS=admin4321
+    - DB_NAME=gitlabhq_production
+    - DB_EXTENSION=pg_trgm
+
+# the following are hints on what volumes to mount if you want to persist data
+#  volumes:
+#	- data/postgresql:/var/lib/postgresql:rw
+
+  redis:
+    container_name: redis-gitlabce
+    restart: always
+    image: redis:5.0.5-alpine
+    command:
+    - --loglevel warning
+    volumes:
+    - ~/Desktop/docker/gitlab/srv/docker/gitlab/redis:/var/lib/redis
